@@ -1,103 +1,240 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import React, { useState } from 'react';
+import { Sidebar } from 'primereact/sidebar';
+import { Button } from "primereact/button";
+import { Panel } from 'primereact/panel';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
+import { Paginator } from 'primereact/paginator';
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+export default function Lojas() {
+
+    const [visible, setVisible] = useState<boolean>(false);
+    const [nomeLoja, setNomeLoja] = useState<string>('');
+    const [selecionarCidade, setSelecionarCidade] = useState(null);
+    const cidades = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
+    const [selecionarStatus, setSelecionarStatus] = useState(null);
+    const status = [
+        { status: 'Ativa' },
+        { status: 'Inativa' }
+    ];
+
+
+    // Paginar
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(10);
+
+    const onPageChange = (event: { first: React.SetStateAction<number>; rows: React.SetStateAction<number>; }) => {
+        setFirst(event.first);
+        setRows(event.rows);
+    };
+
+    return (
+        <div className="p-4">
+            <div className="absolute right-4 card flex justify-center">
+                <Sidebar
+                    visible={visible}
+                    onHide={() => setVisible(false)}
+                    className="bg-white p-4"
+                >
+                    <div className="grid grid-cols-1 gap-4">
+                        <div className="flex items-center">
+                            <i className="pi pi-shop mr-4 text-3xl"></i>
+                            <p className="text-xl">Lojas</p>
+                        </div>
+                        <div className="flex items-center">
+                            <i className="pi pi-users mr-4 text-3xl"></i>
+                            <p className="text-xl">Clientes</p>
+                        </div>
+                    </div>
+
+                </Sidebar>
+                <Button icon="pi pi-bars" className="bg-white border rounded py-1 px-3 text-xl" onClick={() => setVisible(true)} />
+            </div>
+
+
+            <main className="container mx-auto">
+
+                {/*HEADER*/}
+                <header className="mb-8">
+                    <div className="flex items-center">
+                        <p className="text-3xl font-bold text-gray-900">Lojas</p>
+                    </div>
+                    <p className="mt-2">Gerencie suas lojas e acesse produtos de cada unidade</p>
+                </header>
+
+
+                {/*FILTROS*/}
+                <section className="mb-8">
+                    <Panel header="Filtros" className="mb-5">
+                        <form className="mb-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            <div>
+                                <p className="mb-2">Nome da loja</p>
+                                <InputText
+                                    type="text"
+                                    className="w-full"
+                                    placeholder="Buscar por nome"
+                                    value={nomeLoja}
+                                    onChange={(e) => setNomeLoja(e.target.value)}
+                                />
+                            </div>
+
+                            <div>
+                                <p className="mb-2">Cidade</p>
+                                <Dropdown value={selecionarCidade} onChange={(e) => setSelecionarCidade(e.value)} options={cidades} optionLabel="name"
+                                          placeholder="Todas as cidades" className="w-full md:w-14rem"
+                                />
+                            </div>
+
+                            <div>
+                                <p className="mb-2">Status</p>
+                                <Dropdown value={selecionarStatus} onChange={(e) => setSelecionarStatus(e.value)} options={status} optionLabel="status"
+                                          placeholder="Todas os status" className="w-full md:w-14rem"
+                                />
+                            </div>
+                        </form>
+
+                        <div className="flex gap-3 justify-end">
+                            <Button severity="secondary" label="Limpar" icon="pi pi-trash"/>
+                            <Button label="Filtrar" icon="pi pi-search"/>
+                        </div>
+                    </Panel>
+                </section>
+
+                {/*RESULTADO*/}
+                <section>
+                    <span className="block mb-4">Mostrando 3 de 3 loja(s)</span>
+
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        <div
+                            className="relative rounded overflow-hidden shadow-lg bg-white transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
+                            <img className="w-full h-60 object-cover"
+                                 src="https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                 alt="Imagem do Local"/>
+                            <span className="absolute top-2 right-2 bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded-md z-10">ATIVA</span>
+                            <div className="px-6 py-4">
+                                <div className="font-bold text-xl mb-2 text-gray-800">Nome da Empresa/Local 3</div>
+                                <p className="text-gray-700 text-base mb-1">
+                                    <span className="font-semibold">Cidade:</span> Boa Vista, Roraima
+                                </p>
+                                <p className="text-gray-700 text-base mb-1">
+                                    <span className="font-semibold">Telefone:</span> (95) 99999-9999
+                                </p>
+                                <p className="text-gray-700 text-base">
+                                    <span className="font-semibold">E-mail:</span> contato@exemplo.com
+                                </p>
+                            </div>
+                            <div className="px-6 pt-4 pb-2">
+                                <span
+                                    className="inline-block bg-blue-100 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">#local</span>
+                                <span
+                                    className="inline-block bg-green-100 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">#serviços</span>
+                                <span
+                                    className="inline-block bg-purple-100 rounded-full px-3 py-1 text-sm font-semibold text-purple-700 mb-2">#contato</span>
+                            </div>
+                        </div>
+
+                        {/* Card 2 */}
+                        <div
+                            className="relative rounded overflow-hidden shadow-lg bg-white transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
+                            <img className="w-full h-60 object-cover"
+                                 src="https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                 alt="Imagem do Local"/>
+                            <span className="absolute top-2 right-2 bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded-md z-10">ATIVA</span>
+                            <div className="px-6 py-4">
+                                <div className="font-bold text-xl mb-2 text-gray-800">Nome da Empresa/Local 3</div>
+                                <p className="text-gray-700 text-base mb-1">
+                                    <span className="font-semibold">Cidade:</span> Boa Vista, Roraima
+                                </p>
+                                <p className="text-gray-700 text-base mb-1">
+                                    <span className="font-semibold">Telefone:</span> (95) 99999-9999
+                                </p>
+                                <p className="text-gray-700 text-base">
+                                    <span className="font-semibold">E-mail:</span> contato@exemplo.com
+                                </p>
+                            </div>
+                            <div className="px-6 pt-4 pb-2">
+                                <span
+                                    className="inline-block bg-blue-100 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">#local</span>
+                                <span
+                                    className="inline-block bg-green-100 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">#serviços</span>
+                                <span
+                                    className="inline-block bg-purple-100 rounded-full px-3 py-1 text-sm font-semibold text-purple-700 mb-2">#contato</span>
+                            </div>
+                        </div>
+
+                        {/* Card 3 */}
+                        <div
+                            className="relative rounded overflow-hidden shadow-lg bg-white transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
+                            <img className="w-full h-60 object-cover"
+                                 src="https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                 alt="Imagem do Local"/>
+                            <span className="absolute top-2 right-2 bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded-md z-10">ATIVA</span>
+                            <div className="px-6 py-4">
+                                <div className="font-bold text-xl mb-2 text-gray-800">Nome da Empresa/Local 3</div>
+                                <p className="text-gray-700 text-base mb-1">
+                                    <span className="font-semibold">Cidade:</span> Boa Vista, Roraima
+                                </p>
+                                <p className="text-gray-700 text-base mb-1">
+                                    <span className="font-semibold">Telefone:</span> (95) 99999-9999
+                                </p>
+                                <p className="text-gray-700 text-base">
+                                    <span className="font-semibold">E-mail:</span> contato@exemplo.com
+                                </p>
+                            </div>
+                            <div className="px-6 pt-4 pb-2">
+                                <span
+                                    className="inline-block bg-blue-100 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">#local</span>
+                                <span
+                                    className="inline-block bg-green-100 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">#serviços</span>
+                                <span
+                                    className="inline-block bg-purple-100 rounded-full px-3 py-1 text-sm font-semibold text-purple-700 mb-2">#contato</span>
+                            </div>
+                        </div>
+
+                        <div
+                            className="relative rounded overflow-hidden shadow-lg bg-white transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
+                            <img className="w-full h-60 object-cover"
+                                 src="https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                 alt="Imagem do Local"/>
+                            <span className="absolute top-2 right-2 bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded-md z-10">ATIVA</span>
+                            <div className="px-6 py-4">
+                                <div className="font-bold text-xl mb-2 text-gray-800">Nome da Empresa/Local 3</div>
+                                <p className="text-gray-700 text-base mb-1">
+                                    <span className="font-semibold">Cidade:</span> Boa Vista, Roraima
+                                </p>
+                                <p className="text-gray-700 text-base mb-1">
+                                    <span className="font-semibold">Telefone:</span> (95) 99999-9999
+                                </p>
+                                <p className="text-gray-700 text-base">
+                                    <span className="font-semibold">E-mail:</span> contato@exemplo.com
+                                </p>
+                            </div>
+                            <div className="px-6 pt-4 pb-2">
+                                <span
+                                    className="inline-block bg-blue-100 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">#local</span>
+                                <span
+                                    className="inline-block bg-green-100 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">#serviços</span>
+                                <span
+                                    className="inline-block bg-purple-100 rounded-full px-3 py-1 text-sm font-semibold text-purple-700 mb-2">#contato</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <br/>
+                <footer>
+                    <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onPageChange} />
+                </footer>
+
+            </main>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }

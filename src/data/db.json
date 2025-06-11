@@ -1,0 +1,78 @@
+{
+    "lojas": [
+        {
+            "id": 1,
+            "nome": "Loja Centro",
+            "cidade": "Boa Vista",
+            "status": "ativa",
+            "imagem": "..."
+        },
+        {
+            "id": 2,
+            "nome": "Loja Centro",
+            "cidade": "Boa Vista",
+            "status": "ativa",
+            "imagem": "..."
+        },
+        {
+            "id": 3,
+            "nome": "Loja Centro",
+            "cidade": "Boa Vista",
+            "status": "ativa",
+            "imagem": "..."
+        },
+        {
+            "id": 4,
+            "nome": "Loja Centro",
+            "cidade": "Boa Vista",
+            "status": "ativa",
+            "imagem": "..."
+        },
+        {
+            "id": 5,
+            "nome": "Loja Centro",
+            "cidade": "Boa Vista",
+            "status": "ativa",
+            "imagem": "..."
+        }
+    ],
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Produto A",
+            "preco": 19.99,
+            "disponibilidade": "ativo",
+            "categoria": "Eletrônicos",
+            "storeId": 1
+        }
+    ],
+    "clientes": [
+        {
+            "id": 1,
+            "nome": "João",
+            "email": "joao@email.com",
+            "telefone": "95 99999-9999",
+            "documento": "123.456.789-00",
+            "endereco": {
+                "cep": "69300-000",
+                "rua": "Av. Brasil",
+                "numero": "100",
+                "bairro": "Centro",
+                "cidade": "Boa Vista",
+                "estado": "RR"
+            },
+            "pedidos": [
+                {
+                    "lojaId": 1,
+                    "produtos": [
+                        {
+                            "id": 1,
+                            "quantidade": 2,
+                            "valorTotal": 39.98
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
