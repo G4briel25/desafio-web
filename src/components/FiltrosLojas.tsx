@@ -52,7 +52,7 @@ export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
     const handleFiltrar = () => {
         onFiltrar({
             nome: nomeLoja,
-            cidade: selecionarCidade ? selecionarCidade.name : null,
+            cidade: selecionarCidade ? selecionarCidade.code : null,
             status: selecionarStatus ? selecionarStatus.status : null
         })
     };
@@ -103,7 +103,8 @@ export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
                             onChange={(e) => setSelecionarStatus(e.value)}
                             options={statusOpcoes}
                             optionLabel="status"
-                            placeholder="Todas os status" className="w-full md:w-14rem"
+                            placeholder="Todos os status" className="w-full md:w-14rem"
+                            itemTemplate={(item) => <span>{item.status}</span>}
                         />
                     </div>
                 </form>

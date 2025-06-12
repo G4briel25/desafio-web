@@ -16,7 +16,7 @@ export default function Lojas() {
     const [rows, setRows] = useState(6);
 
     const getLojasAtuais = () => {
-        return lojas.slice(first, first + rows);
+        return lojasFiltradas.slice(first, first + rows);
     };
 
     const onPageChange = (event: { first: React.SetStateAction<number>; rows: React.SetStateAction<number>; }) => {
@@ -100,7 +100,7 @@ export default function Lojas() {
             {/*RESULTADO*/}
             <section role="region" aria-labelledby="Listagem de lojas">
                 <span className="block font-semibold mb-4">
-                  Mostrando {lojasFiltradas.length} de {lojas.length} lojas(s)
+                  Resultados: {lojasFiltradas.length} lojas encontradas.
                 </span>
                 <div className="mb-8 grid grid-cols-1 gap-x-20 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
                     {lojasAtuais.length === 0 ? (
@@ -119,7 +119,7 @@ export default function Lojas() {
                     aria-label="Controles de paginação"
                     first={first}
                     rows={rows}
-                    totalRecords={lojas.length}
+                    totalRecords={lojasFiltradas.length}
                     rowsPerPageOptions={[6, 10, 20]}
                     onPageChange={onPageChange}
                     template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"

@@ -4,7 +4,7 @@ export interface Loja {
     id: number;
     nome: string;
     cidade: string;
-    status: 'ativa' | 'inativa';
+    status: 'Ativa' | 'Inativa';
     imagem: string;
     telefone?: string;
     email?: string;
@@ -40,7 +40,7 @@ const lojaService = {
             const lojas = await lojaService.getLojas();
             const statusSet = new Set<string>();
             lojas.forEach(loja => statusSet.add(loja.status));
-            return Array.from(statusSet).map(s => ({status: s === 'ativa' ? 'Ativa' : 'Inativa'}));
+            return Array.from(statusSet).map(s => ({status: s}));
         } catch (error) {
             console.error('Erro ao buscar status únicos:', error);
             throw new Error('Não foi possível carregar os status para filtro.');
