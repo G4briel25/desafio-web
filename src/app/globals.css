@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f8f8f8;
   --foreground: #171717;
 }
 
@@ -12,15 +12,26 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/*@media (prefers-color-scheme: dark) {*/
-/*  :root {*/
-/*    --background: #0a0a0a;*/
-/*    --foreground: #ededed;*/
-/*  }*/
-/*}*/
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/*CSS para o skeleton na parte dos cards da loja*/
+.skeleton-responsive {
+  height: 5rem !important;
+}
+
+@media (min-width: 768px) {
+  .skeleton-responsive {
+    height: 8rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .skeleton-responsive {
+    height: 10rem !important;
+  }
 }
