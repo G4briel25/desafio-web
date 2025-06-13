@@ -24,6 +24,15 @@ export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
     const [selecionarCidade, setSelecionarCidade] = useState(null);
     const [selecionarStatus, setSelecionarStatus] = useState(null);
 
+    // Função para exibir somente quando houver algum filtro
+    const filtrosAtivos = (): boolean => {
+      return !!(
+          nomeLoja.trim() ||
+          selecionarCidade ||
+          selecionarStatus
+      );
+    };
+
     useEffect(() => {
         const fetchFiltros = async () => {
 
@@ -110,12 +119,14 @@ export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
                 </form>
 
                 <div className="flex gap-3 justify-end">
-                    <Button
-                        severity="secondary"
-                        label="Limpar"
-                        icon="pi pi-trash"
-                        onClick={handleLimpar}
-                    />
+                    { filtrosAtivos() && (
+                        <Button
+                            severity="secondary"
+                            label="Limpar"
+                            icon="pi pi-trash"
+                            onClick={handleLimpar}
+                        />
+                    )}
                     <Button
                         label="Filtrar"
                         icon="pi pi-search"

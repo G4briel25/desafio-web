@@ -15,7 +15,7 @@ export default function MenuSiderBar() {
 
     const irParaLojas = () => {
         setVisible(false);
-        router.push('/lojas');
+        router.push('/');
     };
 
     const [visible, setVisible] = useState<boolean>(false);

@@ -116,7 +116,7 @@
             "preco": 19.99,
             "disponibilidade": "ativo",
             "categoria": "Eletrônicos",
-            "storeId": 1
+            "lojaId": 1
         }
     ],
     "clientes": [
