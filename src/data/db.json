@@ -112,11 +112,57 @@
     "produtos": [
         {
             "id": 1,
-            "nome": "Produto A",
-            "preco": 19.99,
-            "disponibilidade": "ativo",
-            "categoria": "Eletrônicos",
+            "nome": "Camisa Listrada",
+            "preco": 49.99,
+            "disponibilidade": "Ativo",
+            "categoria": "Roupa",
+            "imagem": "https://img.freepik.com/fotos-gratis/design-elegante-de-roupas-listradas-em-preto-e-branco-gerado-por-ia_188544-42202.jpg?t=st=1749916901~exp=1749920501~hmac=bd506459a4b397a1a2a16de4ba30bb6730fbcb309afdcd057373957d8f362002&w=1380",
             "lojaId": 1
+        },
+        {
+            "id": 2,
+            "nome": "Camisa Básica",
+            "preco": 49.99,
+            "disponibilidade": "Sem Estoque",
+            "categoria": "Roupa",
+            "imagem": "https://img.freepik.com/fotos-gratis/o-falcao-voador-simboliza-a-forca-e-o-patriotismo-gerados-pela-ia_188544-42205.jpg?t=st=1749931874~exp=1749935474~hmac=75add5389024922d611bcad08ff3b5436629e9b3f2fbbf6eca5555bce819fe31&w=1380",
+            "lojaId": 1
+        },
+        {
+            "id": 3,
+            "nome": "Smartphone Samsung Galaxy",
+            "preco": 1299.99,
+            "disponibilidade": "Ativo",
+            "categoria": "Eletrônicos",
+            "imagem": "https://img.freepik.com/fotos-gratis/ia-geradora-de-tecnologia-de-dispositivo-de-smartphone-de-posicao-traseira_188544-12116.jpg?t=st=1749931982~exp=1749935582~hmac=45cc8e333db530a9a4e9482af32a9ca2f6c67073deafc69670611b210e30c8cf&w=1380",
+            "lojaId": 1
+        },
+        {
+            "id": 4,
+            "nome": "Camisa Listrada",
+            "preco": 49.99,
+            "disponibilidade": "Ativo",
+            "categoria": "Roupa",
+            "imagem": "https://img.freepik.com/fotos-gratis/design-elegante-de-roupas-listradas-em-preto-e-branco-gerado-por-ia_188544-42202.jpg?t=st=1749916901~exp=1749920501~hmac=bd506459a4b397a1a2a16de4ba30bb6730fbcb309afdcd057373957d8f362002&w=1380",
+            "lojaId": 2
+        },
+        {
+            "id": 5,
+            "nome": "Camisa Básica",
+            "preco": 49.99,
+            "disponibilidade": "Sem Estoque",
+            "categoria": "Roupa",
+            "imagem": "https://img.freepik.com/fotos-gratis/o-falcao-voador-simboliza-a-forca-e-o-patriotismo-gerados-pela-ia_188544-42205.jpg?t=st=1749931874~exp=1749935474~hmac=75add5389024922d611bcad08ff3b5436629e9b3f2fbbf6eca5555bce819fe31&w=1380",
+            "lojaId": 2
+        },
+        {
+            "id": 6,
+            "nome": "Smartphone Samsung Galaxy",
+            "preco": 1299.99,
+            "disponibilidade": "Ativo",
+            "categoria": "Eletrônicos",
+            "imagem": "https://img.freepik.com/fotos-gratis/ia-geradora-de-tecnologia-de-dispositivo-de-smartphone-de-posicao-traseira_188544-12116.jpg?t=st=1749931982~exp=1749935582~hmac=45cc8e333db530a9a4e9482af32a9ca2f6c67073deafc69670611b210e30c8cf&w=1380",
+            "lojaId": 3
         }
     ],
     "clientes": [

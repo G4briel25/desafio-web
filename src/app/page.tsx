@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {Paginator} from 'primereact/paginator';
-import lojaService, {Loja} from '@/services/loja-service';
+import lojaService, {LojaService} from "@/services/lojaService";
 import LojaCard from "@/components/LojaCard";
 import Cabecalho from "@/components/Cabecalho";
 import FiltrosLojas from "@/components/FiltrosLojas";
@@ -29,8 +29,8 @@ export default function Lojas() {
     const [loading, setLoading] = useState(true);
 
     //loja-service
-    const [lojas, setLojas] = useState<Loja[]>([]);
-    const [lojasFiltradas, setLojasFiltradas] = useState<Loja[]>([]);
+    const [lojas, setLojas] = useState<LojaService[]>([]);
+    const [lojasFiltradas, setLojasFiltradas] = useState<LojaService[]>([]);
 
     useEffect(() => {
         const fecthLojas = async () => {
@@ -39,13 +39,13 @@ export default function Lojas() {
                 const data = await lojaService.getLojas();
                 setLojas(data);
                 setLojasFiltradas(data);
-            } catch (erro) {
-                console.error('Erro ao buscar lojas:', erro);
+            } catch (error) {
+                console.error('Erro ao buscar lojas:', error);
             } finally {
                 // Intervalo para ver como se comporta na hora de carregar a pagina
                 setTimeout(() => {
                     setLoading(false);
-                }, 2000);
+                }, 900);
             }
         }
 
@@ -91,13 +91,14 @@ export default function Lojas() {
 
     return (
         <main role="main" aria-label="Página principal de lojas">
-            {/*HEADER*/}
-            <Cabecalho/>
+            <Cabecalho
+                titulo={"Lojas"}
+                icone={"pi pi-shop"}
+                descricao={"Gerencie suas lojas e acesse produtos de cada unidade"}
+            />
 
-            {/*FILTROS*/}
             <FiltrosLojas onFiltrar={handleFiltrar} onLimpar={handleLimpar}/>
 
-            {/*RESULTADO*/}
             <section role="region" aria-labelledby="Listagem de lojas">
                 <span className="block font-semibold mb-4">
                   Resultados: {lojasFiltradas.length} lojas encontradas.
@@ -105,11 +106,11 @@ export default function Lojas() {
                 <div className="mb-8 grid grid-cols-1 gap-x-20 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
                     {lojasAtuais.length === 0 ? (
                         <p className="text-center text-gray-600 text-lg">Nenhuma loja encontrada.</p>
-                    ) : (
-                        lojasAtuais.map((loja: Loja) => (
-                            <LojaCard key={loja.id} loja={loja}/>
-                        ))
-                    )
+                        ) : (
+                            lojasAtuais.map((loja: LojaService) => (
+                                <LojaCard key={loja.id} loja={loja}/>
+                            ))
+                        )
                     }
                 </div>
             </section>

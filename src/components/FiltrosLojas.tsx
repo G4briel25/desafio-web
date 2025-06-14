@@ -3,7 +3,7 @@ import {Dropdown} from "primereact/dropdown";
 import {Button} from "primereact/button";
 import {Panel} from "primereact/panel";
 import React, {useEffect, useState} from "react";
-import lojaService from "@/services/loja-service";
+import lojaService from "@/services/lojaService";
 
 interface FiltrosLojasProps {
     onFiltrar: (filtros: {

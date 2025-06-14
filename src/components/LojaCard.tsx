@@ -1,15 +1,12 @@
 import React from 'react';
-import {Loja} from "@/services/loja-service";
+import {LojaService} from "@/services/lojaService";
 import {useRouter} from "next/navigation";
 
 interface LojaCardProps {
-    loja: Loja;
+    loja: LojaService;
 }
 
 const LojaCard: React.FC<LojaCardProps> = ({loja}) => {
-    const statusBgColor = loja.status === 'Ativa' ? 'bg-green-500' : 'bg-red-500';
-    const statusText = loja.status === 'Ativa' ? 'ATIVA' : 'INATIVA';
-
     const router = useRouter();
 
     const irParaProdutos = (_id: number) => {
@@ -26,8 +23,8 @@ const LojaCard: React.FC<LojaCardProps> = ({loja}) => {
                  alt={`Imagem de ${loja.nome}`}
             />
             <span
-                className={`absolute top-2 right-2 ${statusBgColor} text-white text-xs font-bold px-2 py-1 rounded-md z-10`}>
-                    {statusText}
+                className={`absolute top-2 right-2 bg-gray-300 text-black text-xs font-bold px-2 py-1 rounded-md z-10`}>
+                    {loja.status}
                 </span>
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2 text-gray-800">{loja.nome}</div>

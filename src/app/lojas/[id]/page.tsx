@@ -1,76 +1,127 @@
-import {notFound} from 'next/navigation';
-import {Button} from 'primereact/button';
+'use client';
 
-interface Props {
-    params: Promise<{ id: string }> | { id: string };
-}
+import Cabecalho from "@/components/Cabecalho";
+import React, {useEffect, useState} from "react";
+import FiltrosProdutos from "@/components/FiltrosProdutos";
+import produtosService, {ProdutoService} from "@/services/produtosService";
+import LazyLoading from "@/components/LazyLoading";
+import ProdutosCard from "@/components/ProdutosCard";
+import {Paginator} from "primereact/paginator";
+import {useParams} from "next/navigation";
 
-interface Produto {
-    id: number;
-    nome: string;
-    preco: number;
-    disponibilidade: string;
-    categoria: string;
-    lojaId: number;
-}
+export default function ProdutosDaLoja() {
 
-export default async function ProdutosDaLoja({ params }: Props) {
+    const params = useParams();
+    const lojaId = Number(params.id);
 
-    const resolvingParams = await params;
-    const lojaId = resolvingParams.id;
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(5);
+    const [loading, setLoading] = useState(true);
+    const [produtos, setProdutos] = useState<ProdutoService[]>([]);
+    const [produtosFiltrados, setprodutosFiltrados] = useState<ProdutoService[]>([]);
 
-    try {
-        const res = await fetch(`http://localhost:3001/produtos?lojaId=${lojaId}`, {
-            cache: 'no-store',
+    const getProdutosAtuais = () => {
+        return produtosFiltrados.slice(first, first + rows);
+    };
+
+    const onPageChange = (event: { first: React.SetStateAction<number>; rows: React.SetStateAction<number>; }) => {
+        setFirst(event.first);
+        setRows(event.rows);
+    };
+
+    useEffect(() => {
+        const fecthProdutos = async () => {
+            try {
+                setLoading(true);
+                const data = await produtosService.getProdutos(lojaId);
+                setProdutos(data);
+                setprodutosFiltrados(data);
+            } catch (error) {
+                console.error('Erro ao buscar produtos da loja:', error);
+            } finally {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 900);
+            }
+        }
+
+        fecthProdutos();
+    }, [lojaId]);
+
+    const handleFiltrar = (filtros: {
+       nome: string,
+       categoria: string | null,
+    })=> {
+        const produtosFiltrados = produtos.filter(produto => {
+            const matchNome = filtros.nome
+                ? produto.nome.toLowerCase().includes(filtros.nome.toLowerCase())
+                : true;
+
+            const matchCategoria = filtros.categoria
+                ? produto.categoria === filtros.categoria
+                :true;
+
+            return matchNome && matchCategoria;
         });
 
-        if(!res.ok) {
-            throw new Error(`Erro ao buscar produtos da loja! status: ${res.status}`);
-        }
-
-        const produtos: Produto[] = await res.json();
-
-        if(!produtos || produtos.length === 0) {
-            return (
-                <main className="p-4">
-                    <div className="flex flex-col items-center justify-center min-h-[50vh]">
-                        <h1 className="text-2xl font-bold mb-4">
-                            Nenhum produto encontrado para a loja {lojaId}
-                        </h1>
-                        <Button
-                            label="Voltar para lojas"
-                            icon="pi pi-arrow-left"
-                            className="p-button-secondary"
-                        />
-                    </div>
-                </main>
-            );
-        }
-
-        return (
-            <main className="p-4">
-                <Button
-                    label="Meu Botão Tailwind"
-                    icon="pi pi-shop"
-                    className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                />
-                <h1 className="text-2xl font-bold mb-4">Produtos da Loja {lojaId}</h1>
-                <ul className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    {produtos.map((produto: any) => (
-                        <li key={produto.id} className="border p-4 rounded shadow">
-                            <h2 className="text-lg font-semibold">{produto.nome}</h2>
-                            <p>Preço: R$ {produto.preco.toFixed(2)}</p>
-                            <p>Disponibilidade: {produto.disponibilidade}</p>
-                            <p>Categoria: {produto.categoria}</p>
-                        </li>
-                    ))}
-                </ul>
-            </main>
-        );
-
-    } catch (error) {
-        console.error('Erro ao buscar produtos da loja:', error);
-        return notFound();
+        setprodutosFiltrados(produtosFiltrados);
+        setFirst(0);
     }
+
+    const handleLimpar = () => {
+        setprodutosFiltrados(produtos);
+        setFirst(0);
+    };
+
+    if (loading) {
+        return <LazyLoading/>
+    }
+
+    const produtosAtuais = getProdutosAtuais();
+
+    return (
+        <main  role="main" aria-label="Página principal dos produtos">
+            <Cabecalho
+                titulo={"Produtos"}
+                icone={"pi pi-box"}
+                descricao={`${produtos.length} produto(s) cadastrado(s)`}
+            />
+
+            <FiltrosProdutos
+                lojaId={lojaId}
+                onFiltrar={handleFiltrar}
+                onLimpar={handleLimpar}
+            />
+
+            <section role="region" aria-labelledby="Listagem de produtos">
+                    <span className="block font-semibold mb-4">
+                  Resultados: {produtosFiltrados.length} produto(s) encontrado(s).
+                </span>
+                <div className="mb-8 grid grid-cols-1 gap-x-20 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+                    {produtosAtuais.length === 0 ? (
+                        <p className="text-center text-gray-600 text-lg">Nenhum produto encontrado.</p>
+                    ) : (
+                        produtosAtuais.map((produto: ProdutoService) => (
+                            <ProdutosCard key={produto.id} produto={produto}/>
+                        ))
+                    )
+                    }
+                </div>
+            </section>
+
+            <footer role="contentinfo" aria-label="Paginação">
+                <Paginator
+                    aria-label="Controles de paginação"
+                    first={first}
+                    rows={rows}
+                    totalRecords={produtosFiltrados.length}
+                    rowsPerPageOptions={[5, 10, 20]}
+                    onPageChange={onPageChange}
+                    template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                    className="border-round-xl"
+                />
+            </footer>
+        </main>
+    );
 
 }

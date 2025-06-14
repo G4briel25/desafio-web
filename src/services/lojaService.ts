@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export interface Loja {
+export interface LojaService {
     id: number;
     nome: string;
     cidade: string;
@@ -14,9 +14,9 @@ const API_BASE_URL = 'http://localhost:3001';
 
 const lojaService = {
 
-    getLojas: async (): Promise<Loja[]> => {
+    getLojas: async (): Promise<LojaService[]> => {
         try {
-            const response = await axios.get<Loja[]>(`${API_BASE_URL}/lojas`);
+            const response = await axios.get<LojaService[]>(`${API_BASE_URL}/lojas`);
             return response.data;
         } catch (error) {
             console.error('Erro ao buscar lojas:', error);
