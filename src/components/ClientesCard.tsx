@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Cliente} from "@/types/Cliente";
 import clientesService from "@/services/clientesService";
 import DialogCliente from "@/components/DialogCliente";
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 
 interface ClienteCardProps {
@@ -9,17 +10,18 @@ interface ClienteCardProps {
     setDisplayDialog: (displayDialog: boolean) => void;
     isNovoCliente: boolean;
     setIsNovoCliente: (isNewClient: boolean) => void;
-
+    clientes: Cliente[];
+    onClientesChange: () => void;
 }
 
 const ClientesCard = ({
     displayDialog,
     setDisplayDialog,
     isNovoCliente,
-    setIsNovoCliente
+    setIsNovoCliente,
+    clientes,
+    onClientesChange
 }: ClienteCardProps) => {
-
-    const [clientes, setClientes] = useState<Cliente[]>([]);
     const [cliente, setCliente] = useState<Cliente>({
         nome: '',
         email: '',
@@ -35,19 +37,6 @@ const ClientesCard = ({
         }
     });
     const [isEdit, setIsEdit] = useState<boolean>(false);
-
-    const loadClientes = async () => {
-        try {
-            const data = await clientesService.getClientes();
-            setClientes(data);
-        } catch (error) {
-            console.error('Erro ao carregar clientes:', error);
-        }
-    }
-
-    useEffect(() => {
-        loadClientes();
-    }, []);
 
     useEffect(() => {
         if (isNovoCliente && displayDialog) {
@@ -85,16 +74,30 @@ const ClientesCard = ({
                 resetarForm();
                 setDisplayDialog(false);
             }
-            await loadClientes();
+            onClientesChange();
         } catch (error) {
             console.error('Erro ao salvar cliente:', error);
         }
     }
 
+    const confirmarDelete = (cliente: Cliente) => {
+        confirmDialog({
+            message: `Tem certeza que deseja excluir o cliente "${cliente.nome}"?`,
+            header: 'Confirmar Exclusão',
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Sim',
+            rejectLabel: 'Não',
+            acceptClassName: 'p-button-danger',
+            accept: () => cliente.id && deletarCliente(cliente.id),
+            reject: () => {}
+        });
+    };
+
+
     const deletarCliente = async (id: number) => {
         try {
             await clientesService.deleteCliente(id);
-            await loadClientes();
+            onClientesChange();
         } catch (error) {
             console.error('Erro ao deletar cliente:', error);
         }
@@ -119,7 +122,7 @@ const ClientesCard = ({
                             </span>
 
                             <span className="border border-gray-300 rounded p-2 cursor-pointer"
-                                  onClick={() => cliente.id && deletarCliente(cliente.id)}>
+                                  onClick={() => confirmarDelete(cliente)}>
                                 <i className="pi pi-trash" style={{color: 'red'}}></i>
                             </span>
                         </div>
@@ -240,6 +243,8 @@ const ClientesCard = ({
                 resetarForm={resetarForm}
                 salvarCliente={salvarCliente}
             />
+
+            <ConfirmDialog />
         </div>
     )
 }
