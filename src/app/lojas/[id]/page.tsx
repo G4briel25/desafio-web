@@ -8,8 +8,12 @@ import LazyLoading from "@/components/LazyLoading";
 import ProdutosCard from "@/components/ProdutosCard";
 import {Paginator} from "primereact/paginator";
 import {useParams} from "next/navigation";
+import {Button} from "primereact/button";
+import {useRouter} from "next/navigation";
 
 export default function ProdutosDaLoja() {
+
+    const router = useRouter();
 
     const params = useParams();
     const lojaId = Number(params.id);
@@ -80,7 +84,16 @@ export default function ProdutosDaLoja() {
     const produtosAtuais = getProdutosAtuais();
 
     return (
-        <main  role="main" aria-label="Página principal dos produtos">
+        <main role="main" aria-label="Página principal dos produtos">
+
+            <div
+                className="w-40 mb-4 flex justify-center items-center cursor-pointer py-2 px-1 border border-gray-300 rounded bg-white hover:bg-gray-100"
+                onClick={() => router.push('/')}
+            >
+                <i className="pi pi-arrow-left mx-2"></i>
+                Voltar para lojas
+            </div>
+
             <Cabecalho
                 titulo={"Produtos"}
                 icone={"pi pi-box"}
@@ -94,7 +107,7 @@ export default function ProdutosDaLoja() {
             />
 
             <section role="region" aria-labelledby="Listagem de produtos">
-                    <span className="block font-semibold mb-4">
+                <span className="block font-semibold mb-4">
                   Resultados: {produtosFiltrados.length} produto(s) encontrado(s).
                 </span>
                 <div className="mb-8 grid grid-cols-1 gap-x-20 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">

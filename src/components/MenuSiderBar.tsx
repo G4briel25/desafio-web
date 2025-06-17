@@ -22,7 +22,7 @@ export default function MenuSiderBar() {
 
 
     return(
-        <div className="p-4 absolute right-4 card flex justify-center">
+        <div className="absolute right-4 card flex justify-center">
             <Sidebar
                 visible={visible}
                 onHide={() => setVisible(false)}

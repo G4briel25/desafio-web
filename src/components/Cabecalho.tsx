@@ -15,7 +15,7 @@ export default function Cabecalho({titulo, icone, descricao}: CabecalhoProps) {
                 <p className="text-4xl font-bold text-gray-900">{titulo}</p>
             </div>
             <br/>
-            <p>{descricao}</p>
+            <p className="text-lg">{descricao}</p>
         </header>
     )
 
