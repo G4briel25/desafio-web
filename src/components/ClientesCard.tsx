@@ -4,10 +4,23 @@ import { Dialog } from 'primereact/dialog';
 import clientesService from "@/services/clientesService";
 import {InputText} from "primereact/inputtext";
 
-const ClientesCard = () => {
+
+interface ClienteCardProps {
+    displayDialog: boolean;
+    setDisplayDialog: (displayDialog: boolean) => void;
+    isNovoCliente: boolean;
+    setIsNovoCliente: (isNewClient: boolean) => void;
+
+}
+
+const ClientesCard = ({
+    displayDialog,
+    setDisplayDialog,
+    isNovoCliente,
+    setIsNovoCliente
+}: ClienteCardProps) => {
 
     const [clientes, setClientes] = useState<Cliente[]>([]);
-    const [displayDialog, setDisplayDialog] = useState<boolean>(false);
     const [cliente, setCliente] = useState<Cliente>({
         nome: '',
         email: '',
@@ -37,31 +50,16 @@ const ClientesCard = () => {
         loadClientes();
     }, []);
 
-    const salvarCliente = async () => {
-        try {
-            if (isEdit) {
-                await clientesService.updateCliente(cliente);
-            } else {
-                await clientesService.createCliente(cliente);
-            }
-            setDisplayDialog(false);
-            await loadClientes();
-        } catch (error) {
-            console.error('Erro ao salvar cliente:', error);
+    useEffect(() => {
+        if (isNovoCliente && displayDialog) {
+            resetarForm();
+            setIsNovoCliente(false);
         }
-    }
+    }, [isNovoCliente, displayDialog]);
 
-    const deletarCliente = async (id: number) => {
-        try {
-            await clientesService.deleteCliente(id);
-            await loadClientes();
-        } catch (error) {
-            console.error('Erro ao deletar cliente:', error);
-        }
-    }
 
     const resetarForm = () => {
-        setClientes({
+        setCliente({
             nome: '',
             email: '',
             telefone: '',
@@ -78,97 +76,172 @@ const ClientesCard = () => {
         setIsEdit(false);
     }
 
+    const salvarCliente = async () => {
+        try {
+            if (isEdit) {
+                await clientesService.updateCliente(cliente);
+                setDisplayDialog(false);
+            } else {
+                await clientesService.createCliente(cliente);
+                resetarForm();
+                setDisplayDialog(false);
+            }
+            await loadClientes();
+        } catch (error) {
+            console.error('Erro ao salvar cliente:', error);
+        }
+    }
+
+    const deletarCliente = async (id: number) => {
+        try {
+            await clientesService.deleteCliente(id);
+            await loadClientes();
+        } catch (error) {
+            console.error('Erro ao deletar cliente:', error);
+        }
+    }
+
     return (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            <div className="p-6 m-auto md:m-0 bg-white shadow-lg rounded-lg">
-                <div className="flex justify-between items-center">
+            {clientes.map(cliente => (
+                <div key={cliente.id} className="p-6 m-auto md:m-0 bg-white shadow-lg rounded-lg">
+                    <div className="flex justify-between items-center">
                         <span className="font-bold text-xl mr-4 md:m-0">
-                            Gabriel Jaune Ribera
+                            {cliente.nome}
                         </span>
-                    <div className="flex">
+                        <div className="flex">
                         <span className="mr-4 border border-gray-300 rounded p-2 cursor-pointer"
-                              onClick={() => setDisplayDialog(true)}>
-                            <i className="pi pi-pen-to-square"></i>
-                        </span>
-                        <span className="border border-gray-300 rounded p-2 cursor-pointer"
-                              onClick={() => deletarCliente(1)}>
-                            <i className="pi pi-trash" style={{color: 'red'}}></i>
-                        </span>
+                              onClick={() => {
+                                  setCliente(cliente);
+                                  setIsEdit(true);
+                                  setDisplayDialog(true);
+                              }}>
+                                <i className="pi pi-pen-to-square"></i>
+                            </span>
+
+                            <span className="border border-gray-300 rounded p-2 cursor-pointer"
+                                  onClick={() => cliente.id && deletarCliente(cliente.id)}>
+                                <i className="pi pi-trash" style={{color: 'red'}}></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div className="flex sm:flex-wrap justify-between">
-                    <div className="flex flex-col">
+                    <div className="flex sm:flex-wrap justify-between">
+                        <div className="flex flex-col">
                         <span className="mt-2 text-gray-600">
-                            123.456.159-52
+                            {cliente.cpf}
                         </span>
-                        <span className="mt-2">
+                            <span className="mt-2">
                             <i className="pi pi-envelope"></i>
                             <span className="ml-2 text-gray-600">
-                                gabriel@email.com
+                                {cliente.email}
                             </span>
                         </span>
 
-                        <span className="mt-2">
-                            <i className="pi pi-phone"></i>
-                            <span className="ml-2 text-gray-600">95 1489-7925</span>
-                        </span>
-
-                        <span className="mt-2 w-52 flex items-start">
-                            <i className="pi pi-map-marker"></i>
-                            <span className="ml-2 text-gray-600">Rua das Flores, 123 Centro - São Paulo/SP CEP: 01234-567</span>
-                        </span>
-
-                        <div className="border border-gray-600 rounded my-2"></div>
-
-                        <div className="">
-                            <span className="mr-2">
-                                <i className="pi pi-file"></i>
+                            <span className="mt-2">
+                                <i className="pi pi-phone"></i>
+                                <span className="ml-2 text-gray-600">{cliente.telefone}</span>
                             </span>
-                            <span className="font-semibold">Histórico de Pedidos</span>
 
-                            <div className="mt-2">
-                                <span className="text-gray-600">Loja: Centro</span>
-                            </div>
+                            <span className="mt-2 w-52 flex items-start">
+                                <i className="pi pi-map-marker"></i>
+                                <span className="ml-2 text-gray-600">
+                                    {`${cliente.endereco.rua}, ${cliente.endereco.numero} 
+                                    ${cliente.endereco.bairro} - ${cliente.endereco.cidade}/${cliente.endereco.estado} 
+                                    CEP: ${cliente.endereco.cep}`}
+                                </span>
+                            </span>
 
-                            <div className="mt-2 grid grid-cols-2 gap-2">
-                                <div className="flex flex-col">
-                                    <span className="text-gray-600">Total de pedidos:</span>
-                                    <span>1</span>
-                                </div>
+                            <div className="border border-gray-600 rounded my-2"></div>
 
-                                <div className="flex flex-col">
-                                    <span className="text-gray-600">Pedidos concluídos:</span>
-                                    <span>2</span>
-                                </div>
-                            </div>
+                            <div className="">
+                                <span className="mr-2">
+                                    <i className="pi pi-file"></i>
+                                </span>
+                                <span className="font-semibold">Histórico de Pedidos</span>
 
-                            <div className="mt-3 flex flex-col">
-                                <span className="text-gray-600">Total gasto:</span>
-                                <span className="font-bold">
-                            <p style={{color: 'green', fontSize: '20px'}}>R$ 1.299,90</p>
-                        </span>
-                            </div>
+                                {cliente.pedidos && cliente.pedidos.length > 0 ? (
+                                    <>
+                                        <div className="mt-2 grid grid-cols-2 gap-2">
+                                            <div className="flex flex-col">
+                                                <span className="text-gray-600">Total de pedidos:</span>
+                                                <span>{cliente.pedidos.length}</span>
+                                            </div>
 
-                            <div className="mt-3">
-                                <span className="text-gray-600">Últimos pedidos: </span>
-                                <div className="flex justify-between items-center w-full">
-                                    <div className="mt-1">
-                                        <span className="text-sm">Pedido #1</span>
+                                            <div className="flex flex-col">
+                                                <span className="text-gray-600">Pedidos concluídos:</span>
+                                                <span>
+                                                    {cliente.pedidos.filter(pedido => pedido.status === 'Concluído').length}
+                                                </span>
+                                            </div>
+
+                                            </div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <span className="text-gray-600">Total gasto:</span>
+                                                    <span className="font-bold">
+                                                        <p style={{color: 'green', fontSize: '20px'}}>
+                                                            {`R$ ${cliente.pedidos
+                                                                .reduce((total, pedido) => total + pedido.valorTotal, 0)
+                                                                .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
+                                                        </p>
+                                                    </span>
+                                                </div>
+
+                                                <div className="mt-3">
+                                                    <span className="text-gray-600">Últimos pedidos: </span>
+                                                        {cliente.pedidos.map(pedido => (
+                                                            <div key={pedido.id} className="mt-2">
+                                                                <div className="text-gray-600">Loja: {pedido.loja}</div>
+                                                                <div className="flex justify-between items-center w-full">
+                                                                    <div className="mt-1">
+                                                                        <span className="text-sm">Pedido #{pedido.id}</span>
+                                                                        <div className="text-xs text-gray-500">
+                                                                            {pedido.produtos.map(produto => (
+                                                                                <div key={produto.id}>
+                                                                                    {produto.quantidade}x {produto.nome} -
+                                                                                    R$ {produto.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                                                                </div>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <span className={`${
+                                                                            pedido.status === 'Concluído'
+                                                                                ? 'bg-gray-800'
+                                                                                : 'bg-orange-500'
+                                                                            } text-white px-2 py-1 rounded-full text-sm`}>
+                                                                            {pedido.status}
+                                                                        </span>
+                                                                        <span className="ml-2 text-sm">
+                                                                            R$ {pedido.valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                </div>
+                                    </>
+                                ) : (
+                                    <div className="mt-2 text-gray-500">
+                                        Nenhum pedido realizado
                                     </div>
+                                )}
 
-                                    <div>
-                                        <span
-                                            className="bg-gray-800 text-white px-2 py-1 rounded-full text-sm">Concluído</span>
-                                        <span className="ml-2 text-sm">R$ 1.299,90</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            ))}
 
-            <Dialog header="Novo Cliente" visible={displayDialog} onHide={() => setDisplayDialog(false)}>
+            <Dialog
+                header={isEdit ? "Editar Cliente" : "Novo Cliente"}
+                visible={displayDialog}
+                onHide={() => {
+                    setDisplayDialog(false);
+                    if (!isEdit) {
+                        resetarForm();
+                    }
+                }}
+            >
                 <form>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div className="">

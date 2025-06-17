@@ -1,169 +1,256 @@
 {
-  "lojas": [
-    {
-      "id": "1",
-      "nome": "Loja Centro",
-      "cidade": "Boa Vista",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/cenas-do-mall-of-america-em-estilo-cinematografico_23-2151551299.jpg?t=st=1749763387~exp=1749766987~hmac=f43779f6773c40e7b008418bb3bd483932e8eed14e01bef0b1b3862d0f42b395&w=1380",
-      "telefone": "(95) 3212-3456",
-      "email": "centro@lojasbv.com"
-    },
-    {
-      "id": "2",
-      "nome": "Loja Norte",
-      "cidade": "São Paulo",
-      "status": "Inativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/conceito-fast-fashion-com-loja-de-roupas-completa_23-2150871300.jpg?t=st=1749763750~exp=1749767350~hmac=4e8550fe5b9e4c68a7760277a645587fe46ec0f672e675be408b06c684ca1cf2&w=1380",
-      "telefone": "(95) 3223-4567",
-      "email": "norte@lojasbv.com"
-    },
-    {
-      "id": "3",
-      "nome": "Loja Sul",
-      "cidade": "Porto Velho",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/conceito-de-moda-rapida-com-loja-de-roupas-completa_23-2150871188.jpg?t=st=1749763784~exp=1749767384~hmac=555d8fe15a4671ef8181b77326c489922c6686fedfdb1d008851f25c511eea7c&w=1380",
-      "telefone": "(95) 3234-5678",
-      "email": "sul@lojasbv.com"
-    },
-    {
-      "id": "4",
-      "nome": "Loja Oeste",
-      "cidade": "Rio de Janeiro",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/cenas-do-mall-of-america-em-estilo-cinematografico_23-2151551300.jpg?t=st=1749763812~exp=1749767412~hmac=9382d269f5bbf6ad058a834725b68b9f50a62318d18a1fdb66e26cad05470edf&w=1380",
-      "telefone": "(95) 3245-6789",
-      "email": "oeste@lojasbv.com"
-    },
-    {
-      "id": "5",
-      "nome": "Loja Norte II",
-      "cidade": "Porto Velho",
-      "status": "Inativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/centro-comercial-de-estilo-cinematografico_23-2151551174.jpg",
-      "telefone": "(95) 3256-7890",
-      "email": "norte2@lojasbv.com"
-    },
-    {
-      "id": "6",
-      "nome": "Loja Sul II",
-      "cidade": "Boa Vista",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/centro-comercial-de-estilo-cinematografico_23-2151551172.jpg?t=st=1749763881~exp=1749767481~hmac=f9f41b97698a64cb2dcee87b8f8ba920dc43d8a61513f47b2befdd85b0ee3959&w=1380",
-      "telefone": "(95) 3267-8901",
-      "email": "sul2@lojasbv.com"
-    },
-    {
-      "id": "7",
-      "nome": "Loja do Centro-Oeste",
-      "cidade": "Boa Vista",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/conceito-de-fast-fashion-com-mulheres-fazendo-compras_23-2150871364.jpg?t=st=1749763921~exp=1749767521~hmac=c0c5835c3add8e085d2b5aab42f09b0a27a6db91b54b25b422ec3523392fe761&w=1380",
-      "telefone": "(95) 3278-9012",
-      "email": "centrooeste@lojasbv.com"
-    },
-    {
-      "id": "8",
-      "nome": "Loja São Vicente",
-      "cidade": "Boa Vista",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/conceito-fast-fashion-com-loja-de-roupas-completa_23-2150871356.jpg?t=st=1749763952~exp=1749767552~hmac=e28d4d769eb3c892e1c27047ef8c4ceb390bb36d647c2eb1a6edd30bcd6d5626&w=1380",
-      "telefone": "(95) 3289-0123",
-      "email": "saovicente@lojasbv.com"
-    },
-    {
-      "id": "9",
-      "nome": "Loja São Francisco",
-      "cidade": "Boa Vista",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/conceito-de-moda-rapida-com-loja-de-roupas-completa_23-2150871358.jpg?t=st=1749764030~exp=1749767630~hmac=2c8ab81f1f61af6b69c4d99f0aec212dc74855c52a444c25830c7582204b3758&w=1380",
-      "telefone": "(95) 3290-1234",
-      "email": "saofrancisco@lojasbv.com"
-    },
-    {
-      "id": "10",
-      "nome": "Loja Industrial",
-      "cidade": "Boa Vista",
-      "status": "Inativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/balcao-de-bar-iluminado-dentro-de-um-moderno-estabelecimento-de-bebidas-gerado-por-ia_188544-22453.jpg?t=st=1749764125~exp=1749767725~hmac=fc371ae10da9647de431f32f6fe67fce3fda7db9a2a1d3024917fd8b1bce6881&w=1380",
-      "telefone": "(95) 3301-2345",
-      "email": "industrial@lojasbv.com"
-    },
-    {
-      "id": "11",
-      "nome": "Loja do Aeroporto",
-      "cidade": "Rio de Janeiro",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/uma-mulher-se-senta-em-uma-mesa-em-frente-a-uma-caixa-que-diz-uma-das-melhores-coisas-a-fazer_188544-32775.jpg?t=st=1749764159~exp=1749767759~hmac=9c558cd7c3d55f19949b5e3891e2dfbc220e02fad0c7d5374d3fff20265cfef0&w=1380",
-      "telefone": "(95) 3312-3456",
-      "email": "aeroporto@lojasbv.com"
-    },
-    {
-      "id": "12",
-      "nome": "Loja do Shopping",
-      "cidade": "São Paulo",
-      "status": "Ativa",
-      "imagem": "https://img.freepik.com/fotos-gratis/retrato-de-uma-pessoa-trabalhando-em-uma-loja-de-flores-secas_23-2151362011.jpg?ga=GA1.1.1048019792.1741656689&semt=ais_hybrid&w=740",
-      "telefone": "(95) 3323-4567",
-      "email": "shopping@lojasbv.com"
-    }
-  ],
-  "produtos": [
-    {
-      "id": "1",
-      "nome": "Camisa Listrada",
-      "preco": 49.99,
-      "disponibilidade": "Ativo",
-      "categoria": "Roupa",
-      "imagem": "https://img.freepik.com/fotos-gratis/design-elegante-de-roupas-listradas-em-preto-e-branco-gerado-por-ia_188544-42202.jpg?t=st=1749916901~exp=1749920501~hmac=bd506459a4b397a1a2a16de4ba30bb6730fbcb309afdcd057373957d8f362002&w=1380",
-      "lojaId": 1
-    },
-    {
-      "id": "2",
-      "nome": "Camisa Básica",
-      "preco": 49.99,
-      "disponibilidade": "Sem Estoque",
-      "categoria": "Roupa",
-      "imagem": "https://img.freepik.com/fotos-gratis/o-falcao-voador-simboliza-a-forca-e-o-patriotismo-gerados-pela-ia_188544-42205.jpg?t=st=1749931874~exp=1749935474~hmac=75add5389024922d611bcad08ff3b5436629e9b3f2fbbf6eca5555bce819fe31&w=1380",
-      "lojaId": 1
-    },
-    {
-      "id": "3",
-      "nome": "Smartphone Samsung Galaxy",
-      "preco": 1299.99,
-      "disponibilidade": "Ativo",
-      "categoria": "Eletrônicos",
-      "imagem": "https://img.freepik.com/fotos-gratis/ia-geradora-de-tecnologia-de-dispositivo-de-smartphone-de-posicao-traseira_188544-12116.jpg?t=st=1749931982~exp=1749935582~hmac=45cc8e333db530a9a4e9482af32a9ca2f6c67073deafc69670611b210e30c8cf&w=1380",
-      "lojaId": 1
-    },
-    {
-      "id": "4",
-      "nome": "Camisa Listrada",
-      "preco": 49.99,
-      "disponibilidade": "Ativo",
-      "categoria": "Roupa",
-      "imagem": "https://img.freepik.com/fotos-gratis/design-elegante-de-roupas-listradas-em-preto-e-branco-gerado-por-ia_188544-42202.jpg?t=st=1749916901~exp=1749920501~hmac=bd506459a4b397a1a2a16de4ba30bb6730fbcb309afdcd057373957d8f362002&w=1380",
-      "lojaId": 2
-    },
-    {
-      "id": "5",
-      "nome": "Camisa Básica",
-      "preco": 49.99,
-      "disponibilidade": "Sem Estoque",
-      "categoria": "Roupa",
-      "imagem": "https://img.freepik.com/fotos-gratis/o-falcao-voador-simboliza-a-forca-e-o-patriotismo-gerados-pela-ia_188544-42205.jpg?t=st=1749931874~exp=1749935474~hmac=75add5389024922d611bcad08ff3b5436629e9b3f2fbbf6eca5555bce819fe31&w=1380",
-      "lojaId": 2
-    },
-    {
-      "id": "6",
-      "nome": "Smartphone Samsung Galaxy",
-      "preco": 1299.99,
-      "disponibilidade": "Ativo",
-      "categoria": "Eletrônicos",
-      "imagem": "https://img.freepik.com/fotos-gratis/ia-geradora-de-tecnologia-de-dispositivo-de-smartphone-de-posicao-traseira_188544-12116.jpg?t=st=1749931982~exp=1749935582~hmac=45cc8e333db530a9a4e9482af32a9ca2f6c67073deafc69670611b210e30c8cf&w=1380",
-      "lojaId": 3
-    }
-  ],
-  "clientes": []
+    "lojas": [
+        {
+            "id": "1",
+            "nome": "Loja Centro",
+            "cidade": "Boa Vista",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/cenas-do-mall-of-america-em-estilo-cinematografico_23-2151551299.jpg?t=st=1749763387~exp=1749766987~hmac=f43779f6773c40e7b008418bb3bd483932e8eed14e01bef0b1b3862d0f42b395&w=1380",
+            "telefone": "(95) 3212-3456",
+            "email": "centro@lojasbv.com"
+        },
+        {
+            "id": "2",
+            "nome": "Loja Norte",
+            "cidade": "São Paulo",
+            "status": "Inativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/conceito-fast-fashion-com-loja-de-roupas-completa_23-2150871300.jpg?t=st=1749763750~exp=1749767350~hmac=4e8550fe5b9e4c68a7760277a645587fe46ec0f672e675be408b06c684ca1cf2&w=1380",
+            "telefone": "(95) 3223-4567",
+            "email": "norte@lojasbv.com"
+        },
+        {
+            "id": "3",
+            "nome": "Loja Sul",
+            "cidade": "Porto Velho",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/conceito-de-moda-rapida-com-loja-de-roupas-completa_23-2150871188.jpg?t=st=1749763784~exp=1749767384~hmac=555d8fe15a4671ef8181b77326c489922c6686fedfdb1d008851f25c511eea7c&w=1380",
+            "telefone": "(95) 3234-5678",
+            "email": "sul@lojasbv.com"
+        },
+        {
+            "id": "4",
+            "nome": "Loja Oeste",
+            "cidade": "Rio de Janeiro",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/cenas-do-mall-of-america-em-estilo-cinematografico_23-2151551300.jpg?t=st=1749763812~exp=1749767412~hmac=9382d269f5bbf6ad058a834725b68b9f50a62318d18a1fdb66e26cad05470edf&w=1380",
+            "telefone": "(95) 3245-6789",
+            "email": "oeste@lojasbv.com"
+        },
+        {
+            "id": "5",
+            "nome": "Loja Norte II",
+            "cidade": "Porto Velho",
+            "status": "Inativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/centro-comercial-de-estilo-cinematografico_23-2151551174.jpg",
+            "telefone": "(95) 3256-7890",
+            "email": "norte2@lojasbv.com"
+        },
+        {
+            "id": "6",
+            "nome": "Loja Sul II",
+            "cidade": "Boa Vista",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/centro-comercial-de-estilo-cinematografico_23-2151551172.jpg?t=st=1749763881~exp=1749767481~hmac=f9f41b97698a64cb2dcee87b8f8ba920dc43d8a61513f47b2befdd85b0ee3959&w=1380",
+            "telefone": "(95) 3267-8901",
+            "email": "sul2@lojasbv.com"
+        },
+        {
+            "id": "7",
+            "nome": "Loja do Centro-Oeste",
+            "cidade": "Boa Vista",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/conceito-de-fast-fashion-com-mulheres-fazendo-compras_23-2150871364.jpg?t=st=1749763921~exp=1749767521~hmac=c0c5835c3add8e085d2b5aab42f09b0a27a6db91b54b25b422ec3523392fe761&w=1380",
+            "telefone": "(95) 3278-9012",
+            "email": "centrooeste@lojasbv.com"
+        },
+        {
+            "id": "8",
+            "nome": "Loja São Vicente",
+            "cidade": "Boa Vista",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/conceito-fast-fashion-com-loja-de-roupas-completa_23-2150871356.jpg?t=st=1749763952~exp=1749767552~hmac=e28d4d769eb3c892e1c27047ef8c4ceb390bb36d647c2eb1a6edd30bcd6d5626&w=1380",
+            "telefone": "(95) 3289-0123",
+            "email": "saovicente@lojasbv.com"
+        },
+        {
+            "id": "9",
+            "nome": "Loja São Francisco",
+            "cidade": "Boa Vista",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/conceito-de-moda-rapida-com-loja-de-roupas-completa_23-2150871358.jpg?t=st=1749764030~exp=1749767630~hmac=2c8ab81f1f61af6b69c4d99f0aec212dc74855c52a444c25830c7582204b3758&w=1380",
+            "telefone": "(95) 3290-1234",
+            "email": "saofrancisco@lojasbv.com"
+        },
+        {
+            "id": "10",
+            "nome": "Loja Industrial",
+            "cidade": "Boa Vista",
+            "status": "Inativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/balcao-de-bar-iluminado-dentro-de-um-moderno-estabelecimento-de-bebidas-gerado-por-ia_188544-22453.jpg?t=st=1749764125~exp=1749767725~hmac=fc371ae10da9647de431f32f6fe67fce3fda7db9a2a1d3024917fd8b1bce6881&w=1380",
+            "telefone": "(95) 3301-2345",
+            "email": "industrial@lojasbv.com"
+        },
+        {
+            "id": "11",
+            "nome": "Loja do Aeroporto",
+            "cidade": "Rio de Janeiro",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/uma-mulher-se-senta-em-uma-mesa-em-frente-a-uma-caixa-que-diz-uma-das-melhores-coisas-a-fazer_188544-32775.jpg?t=st=1749764159~exp=1749767759~hmac=9c558cd7c3d55f19949b5e3891e2dfbc220e02fad0c7d5374d3fff20265cfef0&w=1380",
+            "telefone": "(95) 3312-3456",
+            "email": "aeroporto@lojasbv.com"
+        },
+        {
+            "id": "12",
+            "nome": "Loja do Shopping",
+            "cidade": "São Paulo",
+            "status": "Ativa",
+            "imagem": "https://img.freepik.com/fotos-gratis/retrato-de-uma-pessoa-trabalhando-em-uma-loja-de-flores-secas_23-2151362011.jpg?ga=GA1.1.1048019792.1741656689&semt=ais_hybrid&w=740",
+            "telefone": "(95) 3323-4567",
+            "email": "shopping@lojasbv.com"
+        }
+    ],
+    "produtos": [
+        {
+            "id": "1",
+            "nome": "Camisa Listrada",
+            "preco": 49.99,
+            "disponibilidade": "Ativo",
+            "categoria": "Roupa",
+            "imagem": "https://img.freepik.com/fotos-gratis/design-elegante-de-roupas-listradas-em-preto-e-branco-gerado-por-ia_188544-42202.jpg?t=st=1749916901~exp=1749920501~hmac=bd506459a4b397a1a2a16de4ba30bb6730fbcb309afdcd057373957d8f362002&w=1380",
+            "lojaId": 1
+        },
+        {
+            "id": "2",
+            "nome": "Camisa Básica",
+            "preco": 49.99,
+            "disponibilidade": "Sem Estoque",
+            "categoria": "Roupa",
+            "imagem": "https://img.freepik.com/fotos-gratis/o-falcao-voador-simboliza-a-forca-e-o-patriotismo-gerados-pela-ia_188544-42205.jpg?t=st=1749931874~exp=1749935474~hmac=75add5389024922d611bcad08ff3b5436629e9b3f2fbbf6eca5555bce819fe31&w=1380",
+            "lojaId": 1
+        },
+        {
+            "id": "3",
+            "nome": "Smartphone Samsung Galaxy",
+            "preco": 1299.99,
+            "disponibilidade": "Ativo",
+            "categoria": "Eletrônicos",
+            "imagem": "https://img.freepik.com/fotos-gratis/ia-geradora-de-tecnologia-de-dispositivo-de-smartphone-de-posicao-traseira_188544-12116.jpg?t=st=1749931982~exp=1749935582~hmac=45cc8e333db530a9a4e9482af32a9ca2f6c67073deafc69670611b210e30c8cf&w=1380",
+            "lojaId": 1
+        },
+        {
+            "id": "4",
+            "nome": "Camisa Listrada",
+            "preco": 49.99,
+            "disponibilidade": "Ativo",
+            "categoria": "Roupa",
+            "imagem": "https://img.freepik.com/fotos-gratis/design-elegante-de-roupas-listradas-em-preto-e-branco-gerado-por-ia_188544-42202.jpg?t=st=1749916901~exp=1749920501~hmac=bd506459a4b397a1a2a16de4ba30bb6730fbcb309afdcd057373957d8f362002&w=1380",
+            "lojaId": 2
+        },
+        {
+            "id": "5",
+            "nome": "Camisa Básica",
+            "preco": 49.99,
+            "disponibilidade": "Sem Estoque",
+            "categoria": "Roupa",
+            "imagem": "https://img.freepik.com/fotos-gratis/o-falcao-voador-simboliza-a-forca-e-o-patriotismo-gerados-pela-ia_188544-42205.jpg?t=st=1749931874~exp=1749935474~hmac=75add5389024922d611bcad08ff3b5436629e9b3f2fbbf6eca5555bce819fe31&w=1380",
+            "lojaId": 2
+        },
+        {
+            "id": "6",
+            "nome": "Smartphone Samsung Galaxy",
+            "preco": 1299.99,
+            "disponibilidade": "Ativo",
+            "categoria": "Eletrônicos",
+            "imagem": "https://img.freepik.com/fotos-gratis/ia-geradora-de-tecnologia-de-dispositivo-de-smartphone-de-posicao-traseira_188544-12116.jpg?t=st=1749931982~exp=1749935582~hmac=45cc8e333db530a9a4e9482af32a9ca2f6c67073deafc69670611b210e30c8cf&w=1380",
+            "lojaId": 3
+        }
+    ],
+    "clientes": [
+        {
+            "id": 3,
+            "nome": "Ana Santos",
+            "email": "ana.santos@email.com",
+            "telefone": "(95) 98888-7777",
+            "cpf": "456.789.123-00",
+            "endereco": {
+                "cep": "69305-120",
+                "rua": "Avenida Ene Garcez",
+                "numero": "789",
+                "bairro": "Centro",
+                "cidade": "Boa Vista",
+                "estado": "RR"
+            },
+            "pedidos": [
+                {
+                    "id": 1,
+                    "data": "2024-06-10",
+                    "loja": "Loja Centro",
+                    "status": "Concluído",
+                    "produtos": [
+                        {
+                            "id": "1",
+                            "nome": "Camisa Listrada",
+                            "quantidade": 2,
+                            "valor": 49.99
+                        },
+                        {
+                            "id": "3",
+                            "nome": "Smartphone Samsung Galaxy",
+                            "quantidade": 1,
+                            "valor": 1299.99
+                        }
+                    ],
+                    "valorTotal": 1399.97
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "nome": "Pedro Oliveira",
+            "email": "pedro.oliveira@email.com",
+            "telefone": "(95) 97777-6666",
+            "cpf": "789.123.456-00",
+            "endereco": {
+                "cep": "69309-100",
+                "rua": "Avenida Venezuela",
+                "numero": "456",
+                "bairro": "Pricumã",
+                "cidade": "Boa Vista",
+                "estado": "RR"
+            },
+            "pedidos": [
+                {
+                    "id": 1,
+                    "data": "2024-06-01",
+                    "loja": "Loja Centro",
+                    "status": "Concluído",
+                    "produtos": [
+                        {
+                            "id": "1",
+                            "nome": "Camisa Listrada",
+                            "quantidade": 3,
+                            "valor": 49.99
+                        }
+                    ],
+                    "valorTotal": 149.97
+                },
+                {
+                    "id": 2,
+                    "data": "2024-06-16",
+                    "loja": "Loja Centro",
+                    "status": "Concluído",
+                    "produtos": [
+                        {
+                            "id": "3",
+                            "nome": "Smartphone Samsung Galaxy",
+                            "quantidade": 1,
+                            "valor": 1299.99
+                        }
+                    ],
+                    "valorTotal": 1299.99
+                }
+            ]
+        }
+    ]
+
 }

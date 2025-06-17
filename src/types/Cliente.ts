@@ -1,4 +1,4 @@
-import {Endereco} from "@/types/Endereco";
+import {Pedido} from "@/types/Pedido";
 
 export interface Cliente {
     id?: number;
@@ -6,5 +6,14 @@ export interface Cliente {
     email: string;
     telefone: string;
     cpf: string;
-    endereco: Endereco;
+    endereco: {
+        cep: string;
+        rua: string;
+        numero: string;
+        bairro: string;
+        cidade: string;
+        estado: string;
+    };
+    pedidos?: Pedido[];
+
 }

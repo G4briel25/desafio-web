@@ -1,12 +1,22 @@
 'use client';
 
-import React from "react";
+import React, {useState} from "react";
 import FiltrosClientes from "@/components/FiltrosClientes";
 import {Paginator} from "primereact/paginator";
 import ClientesCard from "@/components/ClientesCard";
 import CabecalhoClientes from "@/components/CabecalhoClientes";
 
-export default function clientes() {
+export default function Clientes() {
+
+    const [displayDialog, setDisplayDialog] = useState<boolean>(false);
+    const [isNovoCliente, setIsNovoCliente] = useState<boolean>(false);
+
+    const handleNovoCliente = () => {
+        setIsNovoCliente(true);
+        setDisplayDialog(true);
+    };
+
+
     return(
         <main role="main" aria-label="Página principal dos clientes">
 
@@ -14,7 +24,7 @@ export default function clientes() {
                 titulo={"Clientes"}
                 icone={"pi pi-users"}
                 descricao={"Gerencie seus clientes e acompanhe o histórico de pedidos"}
-                clicked={() => alert('Novo cliente')}
+                clicked={handleNovoCliente}
             />
 
             <FiltrosClientes
@@ -23,9 +33,14 @@ export default function clientes() {
 
             <section role="region" aria-labelledby="Listagem de clientes">
                 <span className="block font-semibold mb-4">
-                  Resultados:  produto(s) encontrado(s).
+                    Resultados: produto(s) encontrado(s).
                 </span>
-                <ClientesCard/>
+                <ClientesCard
+                    displayDialog={displayDialog}
+                    setDisplayDialog={setDisplayDialog}
+                    isNovoCliente={isNovoCliente}
+                    setIsNovoCliente={setIsNovoCliente}
+                />
             </section>
 
             <footer role="contentinfo" aria-label="Paginação">
