@@ -84,7 +84,7 @@
     {
       "id": "10",
       "nome": "Loja Industrial",
-      "cidade": "Boa Vista",
+      "cidade": "São Paulo",
       "status": "Inativa",
       "imagem": "https://img.freepik.com/fotos-gratis/balcao-de-bar-iluminado-dentro-de-um-moderno-estabelecimento-de-bebidas-gerado-por-ia_188544-22453.jpg?t=st=1749764125~exp=1749767725~hmac=fc371ae10da9647de431f32f6fe67fce3fda7db9a2a1d3024917fd8b1bce6881&w=1380",
       "telefone": "(95) 3301-2345",
@@ -250,22 +250,6 @@
           "valorTotal": 1299.99
         }
       ]
-    },
-    {
-      "id": "5",
-      "nome": "Carla Souza",
-      "email": "carla.souza@email.com",
-      "telefone": "(95) 96666-5555",
-      "cpf": "321.654.987-00",
-      "endereco": {
-        "cep": "69315-380",
-        "rua": "Rua das Orquídeas",
-        "numero": "123",
-        "bairro": "Jardim Floresta",
-        "cidade": "Boa Vista",
-        "estado": "RR"
-      },
-      "pedidos": []
     }
   ]
 }

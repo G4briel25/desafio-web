@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏪 Sistema de Gestão de Lojas e Clientes
 
-## Getting Started
+## 📋 Visão Geral do Projeto
 
-First, run the development server:
+Sistema web desenvolvido com **Next.js** e **TypeScript** para a gestão de **lojas, clientes e produtos**. A interface é moderna e responsiva, utilizando **PrimeReact** e **Tailwind CSS** para proporcionar uma ótima experiência ao usuário.
+
+### ✅ Funcionalidades Principais
+
+- 📁 Gestão completa de clientes
+- 🏬 Visualização e gerenciamento de lojas
+- 📦 Controle de produtos por loja
+- 🔍 Sistema de filtros dinâmicos
+- 📱 Interface responsiva e intuitiva
+
+---
+
+## 🚀 Instalação e Execução
+
+### 🔧 Pré-requisitos
+
+- Node.js (versão **18** ou superior)
+- npm (gerenciador de pacotes)
+
+### ⚙️ Passos para rodar o projeto
 
 ```bash
+# 1. Clone o repositório
+git clone https://github.com/G4briel25/desafio-web.git
+
+# 2. Acesse a pasta do projeto
+cd desafio-web
+
+# 3. Instale as dependências
+npm install
+
+# 4. Inicie o servidor de desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Em outro terminal, inicie o JSON Server (API mock):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd .\src\data\
+npx json-server db.json --port 3001
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Acesse o projeto em: [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+Acesse o json server em: [http://localhost:3001](http://localhost:3001)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Decisões Técnicas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🧱 Stack Tecnológica
 
-## Deploy on Vercel
+- **Next.js 15.3.3** — Framework com suporte a SSR e App Router
+- **TypeScript** — Tipagem estática e maior manutenibilidade
+- **PrimeReact 10.9.6** — Biblioteca rica em componentes UI
+- **Tailwind CSS** — Estilização com classes utilitárias
+- **JSON Server** — Simulação de API REST para desenvolvimento local
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 📁 Estrutura do Projeto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/           # Rotas e páginas
+├── components/    # Componentes reutilizáveis
+├── services/      # Comunicação com a API
+├── types/         # Tipos e interfaces do TypeScript
+└── utils/         # Funções auxiliares
+```
+
+### 📐 Padrões Adotados
+
+- 🔁 **Componentização** — Reutilização e modularidade
+- 🌐 **Services** — Abstração de chamadas à API
+- 🧩 **Types** — Tipagem clara e segura
+- ⏳ **Lazy Loading** — Melhor performance no carregamento
+
+---
+
+## 📸 Screenshots
+
+# 🏬 Gestão de Lojas
+![Tela de lojas](./public/lojas.png)
+![Tela de lojas mobile](./public/lojas-mobile.png)
+
+# 📦 Gestão de Produtos
+![Tela de produtos](./public/produtos.png)
+![Tela de produtos mobile](./public/produtos-mobile.png)
+
+# 👥 Gestão de Clientes
+![Tela de clientes](./public/clientes.png)
+![Tela de editar clientes](./public/clientes-editar.png)
+![Tela de clientes mobile](./public/clientes-mobile.png)
+
+---
+
+## 📦 Scripts Disponíveis
+
+### Desenvolvimento
+
+```bash
+npm run dev       # Inicia o frontend em modo desenvolvimento
+
+cd .\src\data\
+npx json-server db.json --port 3001 # Inicia o JSON Server (API fake)
+```
+
+---
+
+## 🌍 Ambiente Padrão
+
+| Serviço     | URL                        |
+|-------------|----------------------------|
+| Frontend    | http://localhost:3000      |
+| JSON Server | http://localhost:3001      |
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Gabriel Jaune** para um desafio técnico.
+
+---
