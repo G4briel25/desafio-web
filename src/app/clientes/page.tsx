@@ -7,23 +7,32 @@ import ClientesCard from "@/components/ClientesCard";
 import CabecalhoClientes from "@/components/CabecalhoClientes";
 import clientesService from "@/services/clientesService";
 import {Cliente} from "@/types/Cliente";
+import LazyLoading from "@/components/LazyLoading";
 
 export default function Clientes() {
 
     const [first, setFirst] = useState(0);
     const [rows, setRows] = useState(6);
     const [clientes, setClientes] = useState<Cliente[]>([]);
+    const [clientesFiltrados, setClientesFiltrados] = useState<Cliente[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const getClientesAtuais = () => {
-        return clientes.slice(first, first + rows);
+        return clientesFiltrados.slice(first, first + rows);
     };
 
     const loadClientes = async () => {
         try {
+            setLoading(true);
             const data = await clientesService.getClientes();
             setClientes(data);
+            setClientesFiltrados(data);
         } catch (error) {
             console.error('Erro ao carregar clientes:', error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 900);
         }
     };
 
@@ -44,6 +53,28 @@ export default function Clientes() {
         setDisplayDialog(true);
     };
 
+    const handleFiltrar = (filtros: { nome: string; email: string }) => {
+        const filtrados = clientes.filter(cliente => {
+            const nomeMatch = filtros.nome ?
+                cliente.nome.toLowerCase().includes(filtros.nome.toLowerCase()) : true;
+            const emailMatch = filtros.email ?
+                cliente.email.toLowerCase().includes(filtros.email.toLowerCase()) : true;
+
+            return nomeMatch && emailMatch;
+        });
+
+        setClientesFiltrados(filtrados);
+        setFirst(0);
+    };
+
+    const handleLimparFiltros = () => {
+        setClientesFiltrados(clientes);
+        setFirst(0);
+    };
+
+    if (loading) {
+        return <LazyLoading/>
+    }
 
     return(
         <main role="main" aria-label="Página principal dos clientes">
@@ -56,12 +87,13 @@ export default function Clientes() {
             />
 
             <FiltrosClientes
-
+                onFiltrar={handleFiltrar}
+                onLimpar={handleLimparFiltros}
             />
 
             <section role="region" aria-labelledby="Listagem de clientes">
                 <span className="block font-semibold mb-4">
-                    Resultados: produto(s) encontrado(s).
+                    Resultados: {clientesFiltrados.length} cliente(s) encontrado(s).
                 </span>
                 <ClientesCard
                     displayDialog={displayDialog}

@@ -14,6 +14,15 @@ interface FiltrosLojasProps {
     onLimpar: () => void;
 }
 
+interface Cidade {
+    name: string;
+    code: string;
+}
+
+interface Status {
+    status: string;
+}
+
 export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
 
     const [nomeLoja, setNomeLoja] = useState<string>('');
@@ -21,16 +30,31 @@ export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
     const [cidades, setCidades] = useState<{name: string, code: string}[]>([]); //Tipo para cidades
     const [statusOpcoes, setStatusOpcoes] = useState<{status: string}[]>([]); //Tipo para status
 
-    const [selecionarCidade, setSelecionarCidade] = useState(null);
-    const [selecionarStatus, setSelecionarStatus] = useState(null);
+    const [cidadeSelecionada, setCidadeSelecionada] = useState<Cidade | null>(null);
+    const [statusSelecionado, setStatusSelecionado] = useState<Status | null>(null);
 
     // Função para exibir somente quando houver algum filtro
     const filtrosAtivos = (): boolean => {
       return !!(
           nomeLoja.trim() ||
-          selecionarCidade ||
-          selecionarStatus
+          cidadeSelecionada ||
+          statusSelecionado
       );
+    };
+
+    const handleFiltrar = () => {
+        onFiltrar({
+            nome: nomeLoja,
+            cidade: cidadeSelecionada?.code ?? null,
+            status: statusSelecionado?.status ?? null
+        });
+    };
+
+    const handleLimpar = () => {
+        setNomeLoja('');
+        setCidadeSelecionada(null);
+        setStatusSelecionado(null);
+        onLimpar();
     };
 
     useEffect(() => {
@@ -58,21 +82,6 @@ export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
         fetchFiltros();
     }, []);
 
-    const handleFiltrar = () => {
-        onFiltrar({
-            nome: nomeLoja,
-            cidade: selecionarCidade ? selecionarCidade.code : null,
-            status: selecionarStatus ? selecionarStatus.status : null
-        })
-    };
-
-    const handleLimpar = () => {
-        setNomeLoja('');
-        setSelecionarCidade(null);
-        setSelecionarStatus(null);
-        onLimpar();
-    }
-
     return (
         <section>
             <Panel header="Filtros" className="mb-5">
@@ -97,8 +106,8 @@ export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
                     <div>
                         <p className="mb-2">Cidade</p>
                         <Dropdown
-                            value={selecionarCidade}
-                            onChange={(e) => setSelecionarCidade(e.value)}
+                            value={cidadeSelecionada}
+                            onChange={(e) => setCidadeSelecionada(e.value)}
                             options={cidades}
                             optionLabel="name"
                             placeholder="Todas as cidades" className="w-full md:w-14rem"
@@ -108,8 +117,8 @@ export default function FiltrosLojas({onFiltrar, onLimpar}: FiltrosLojasProps) {
                     <div>
                         <p className="mb-2">Status</p>
                         <Dropdown
-                            value={selecionarStatus}
-                            onChange={(e) => setSelecionarStatus(e.value)}
+                            value={statusSelecionado}
+                            onChange={(e) => setStatusSelecionado(e.value)}
                             options={statusOpcoes}
                             optionLabel="status"
                             placeholder="Todos os status" className="w-full md:w-14rem"
