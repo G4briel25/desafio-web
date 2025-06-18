@@ -28,13 +28,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="pt-BR">
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased container mx-auto p-4`}
-        >
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased container mx-auto p-4`}
+            >
 
-        <MenuSiderBar/>
-        {children}
-        </body>
+                <MenuSiderBar/>
+                {children}
+            </body>
         </html>
     );
 }
